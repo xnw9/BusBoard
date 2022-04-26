@@ -14,14 +14,19 @@ ask the user for a stop code:
 
 ### p3 promises
 - [x] pull each function out and give them their own definition
-
-give chance to pass errors along to the top-level function.
-
-- [ ] goal: asynchronous request returns a Promise instead of accepting a callback
+- [ ] give chance to pass errors along to the top-level function.
+- [x] goal: asynchronous request returns a Promise instead of accepting a callback
 
 ### p4 express
-- [ ] Create an endpoint (e.g. '/departureBoards') which takes the postcode as a query parameter 
-- [ ] and returns the next 5 arrivals for the closest 2 stops as an appropriate JSON object
-- [ ] Run your Express application and try to access this endpoint from your browser to check that it's working.
+- [x] Create an endpoint ('/board') which takes the postcode as a query parameter 
+- [x] and returns the next 5 arrivals for the closest 2 stops as an appropriate JSON object
+- [x] Run your Express application and try to access this endpoint from your browser to check that it's working.
 
 See if you can return a sensible error code in case you can't find any results!
+
+### p5 all aboard
+- [ ] render HTML
+- [ ] Get the postcode that was entered
+- [ ] Make a request to our API endpoint to find the data for that postcode
+- [ ] Update the HTML on the page to display the results
+

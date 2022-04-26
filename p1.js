@@ -22,6 +22,7 @@ function nextFive(stopID) {
         }
     })
 }
+
 // nextFive(here)
 
 function findlonlat(postcode) {
@@ -37,6 +38,7 @@ function findlonlat(postcode) {
     })
 
 }
+
 //findlonlat("SE85EP")
 
 function findStop(lat, lon) {
@@ -53,6 +55,7 @@ function findStop(lat, lon) {
     })
 
 }
+
 // findStop(51.491035, -0.038207)
 
 // postcode -> stop code in one functiong
@@ -81,6 +84,7 @@ function findStopCodeR(postcode) {
         })
     })
 }
+
 // findStopCodeR("SE85EP")
 
 // ---------------------------- promises -----------------------------------
@@ -105,6 +109,7 @@ function postcode2lonlat(postcode) {
         })
     })
 }
+
 // postcode2lonlat("SE85EP")
 
 function lonlat2stop(lon, lat) {
@@ -127,6 +132,7 @@ function lonlat2stop(lon, lat) {
 
     })
 }
+
 // lonlat2stop(-0.038207, 51.491035)
 
 function showDetails(stopCode) {
@@ -145,7 +151,7 @@ function showDetails(stopCode) {
 
                 console.log(lineName, desName, time)
                 details.push([lineName, desName, time])
-                resolve(details)
+            resolve(details)
             }
         })
 
@@ -160,7 +166,7 @@ function showDetails(stopCode) {
 
 
 // is this ok???
-function findStopCode(postcode) {
+function findStopCodeR(postcode) {
     const runProgram = async () => {
         let lonlat = await postcode2lonlat(postcode);
         lon = lonlat[0]
@@ -183,7 +189,57 @@ function findStopCode(postcode) {
 
 }
 
-findStopCode("NW5 1TL")
+function getStopsDetails(stops) {
+    return new Promise((resolve) => {
+        stop1 = stops[0][0]
+        stop2 = stops[1][0]
+        console.log(`We got ${stop1} ${stop2}`)
+
+
+        let details = []
+        appKey = "c2a002a07d574daaa294449eed950387"
+
+        for (let j in stops) {
+            let detail = [stops[j][1]]
+            requestLink = "https://api.tfl.gov.uk/StopPoint/" + stops[j][0] + "/Arrivals?app_key=" + appKey
+            request(requestLink, function (error, response, body) {
+                let json = JSON.parse(body);
+                let num = json.length       // avoid going out of range
+                for (let i = 0; i < Math.min(num, 5); i++) {
+                    lineName = json[i]["lineName"]
+                    desName = json[i]["destinationName"]
+                    time = parseFloat(json[i]["timeToStation"] / 60).toFixed(2)
+
+                    console.log(lineName, desName, time)
+                    detail.push([lineName, desName, time])
+                }
+                details.push(detail)
+
+                if (details.length == 2) {
+                    resolve(details)
+                }
+                // so need to resolve WITHIN request to get it out
+            })
+
+        }
+
+        // resolve(details)
+
+    })
+}
+
+let stops = [[ '490008660S', 'Greenwood Centre' ],[ '490008660N', 'Lady Somerset Road' ] ]
+// findStopCode(stops)
+
+
+const runProgram = async () => {
+    let r = await getStopsDetails(stops)
+    console.log(r)
+}
+runProgram();
+
+
+
 // TODO: construct JSON for result
 
 // ----------------------------- express --------------------------------

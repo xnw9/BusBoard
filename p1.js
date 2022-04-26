@@ -137,18 +137,18 @@ function lonlat2stop(lon, lat) {
 
 // lonlat2stop(-0.038207, 51.491035)
 
+// change to JSON here
 function getStopsDetails(stops) {
     return new Promise((resolve) => {
         stop1 = stops[0][0]
         stop2 = stops[1][0]
         console.log(`We got ${stop1} ${stop2}`)
 
-
         let details = []
         appKey = "c2a002a07d574daaa294449eed950387"
 
         for (let j in stops) {
-            let detail = [stops[j][1]]
+            let detail = [{"stationName" : stops[j][1]}]
             requestLink = "https://api.tfl.gov.uk/StopPoint/" + stops[j][0] + "/Arrivals?app_key=" + appKey
             request(requestLink, function (error, response, body) {
                 let json = JSON.parse(body);
@@ -159,7 +159,12 @@ function getStopsDetails(stops) {
                     time = parseFloat(json[i]["timeToStation"] / 60).toFixed(2)
 
                     console.log(lineName, desName, time)
-                    detail.push([lineName, desName, time])
+                    let item = {
+                        "lineName": lineName,
+                        "desName": desName,
+                        "time": time
+                    }
+                    detail.push(item)
                 }
                 details.push(detail)
 
@@ -190,7 +195,7 @@ const runProgram = async () => {
 runProgram();
 
 
-// TODO: construct JSON for result
+// TODO: reject in Promises!  -  how to catch errors
 // perhaps TODO: arrange in order
 
 // ----------------------------- express --------------------------------

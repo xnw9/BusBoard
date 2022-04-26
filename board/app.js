@@ -104,6 +104,8 @@ function getInfo(postcode) {
 
 }
 
+app.use(express.static('frontend'));            // need to be in front of everything
+
 app.get('/', (req, res) => {
     // res.send('Hello World!!!')
     const runProgram = async () => {
@@ -115,17 +117,20 @@ app.get('/', (req, res) => {
         let r = await getStopsDetails(stops)
 
         console.log(r)
-        // res.send(r)
-        res.send(`For postcode ${postcode} :`)
+        res.send(r)
+        // res.send(`For postcode ${postcode} :`)
     }
     runProgram();
 
 })
 
-// TODO: construct JSON for result
-// TODO: send multiple stuff to client
-// TODO: (p5?) display
+// DONE: construct JSON for result
+// DONE: send multiple stuff to client
+// TODO: import promises from p1.js instead
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+

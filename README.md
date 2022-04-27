@@ -25,8 +25,8 @@ ask the user for a stop code:
 See if you can return a sensible error code in case you can't find any results!
 
 ### p5 all aboard
-- [ ] render HTML
-- [ ] Get the postcode that was entered
+- [x] render HTML
+- [x] Get the postcode that was entered
 - [ ] Make a request to our API endpoint to find the data for that postcode
 - [ ] Update the HTML on the page to display the results
 

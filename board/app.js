@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-here="SE8 5EP"
+here = "SE8 5EP"
 
 const request = require('request');
 
@@ -26,8 +26,6 @@ function postcode2lonlat(postcode) {
         })
     })
 }
-
-// postcode2lonlat("SE85EP")
 
 function lonlat2stop(lon, lat) {
     return new Promise((resolve) => {
@@ -95,7 +93,7 @@ function getInfo(postcode) {
     const runProgram = async () => {
         let lonlat = await postcode2lonlat(postcode);
 
-        let stops = await lonlat2stop( lonlat[0], lonlat[1]);       // lon & lat
+        let stops = await lonlat2stop(lonlat[0], lonlat[1]);       // lon & lat
 
         let r = await getStopsDetails(stops)
         console.log(r)
@@ -104,21 +102,26 @@ function getInfo(postcode) {
 
 }
 
-app.use(express.static('frontend'));            // need to be in front of everything
+// need to be in front of everything
+app.use(express.static('frontend'));
 
-app.get('/', (req, res) => {
-    // res.send('Hello World!!!')
+// TODO: add reject / get reject / if reject, raise 404 maybe
+app.get("/board", (req, res) => {
+    // JSON result is visible from the browser
+    // route parameter: /board
+    // query parameter: ?para=parameter
+
     const runProgram = async () => {
-        let postcode = "SW7 5QQ"
+        let postcode = req.query["postcode"]
+
         let lonlat = await postcode2lonlat(postcode);
 
-        let stops = await lonlat2stop( lonlat[0], lonlat[1]);       // lon & lat
+        let stops = await lonlat2stop(lonlat[0], lonlat[1]);
 
         let r = await getStopsDetails(stops)
 
         console.log(r)
         res.send(r)
-        // res.send(`For postcode ${postcode} :`)
     }
     runProgram();
 

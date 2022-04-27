@@ -50,19 +50,19 @@ var XMLHttpRequest = require('xhr2');
 
 
 // modify HTML from script
-
-
+var postcode="sw75qq"
+var XMLHttpRequest = require('xhr2');    // remember to remove when using in browser!!
 var xhttp = new XMLHttpRequest();
-
-xhttp.open('GET', 'http://localhost:3000/board?postcode=sw75qq', true);
-
+xhttp.open('GET', 'http://localhost:3000/board?postcode=' + postcode, true);
 xhttp.setRequestHeader('Content-Type', 'application/json');
-
-xhttp.onload = function() {
-    // Handle response here using e.g. xhttp.status, xhttp.response, xhttp.responseText
+xhttp.onload = function () {
     var resText = xhttp.responseText
+    console.log(resText)
     let json = JSON.parse(resText);
-    console.log(json)           // now we got the json, what next?
-}
+    // console.log(json)           // now we got the json, what next?
+    console.log("got json")
 
+}
 xhttp.send();
+
+

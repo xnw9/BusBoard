@@ -15,36 +15,27 @@
     <input type="submit" value="Submit">
 </form>
 <div id="results">
-    <h2>Results</h2>
-    <h3>Example stop 1</h3>
+    <h2 id="result">Results</h2>
+    <h3 id="stop1">Example stop 1</h3>
     <ul>
-        <li>2 minutes: 123 to Example Street</li>
-        <li>3 minutes: 456 to Fantasy Land</li>
+        <li id="stop1_1">2 minutes: 123 to Example Street</li>
+        <li id="stop1_2">3 minutes: 456 to Fantasy Land</li>
+        <li id="stop1_3"> </li>
+        <li id="stop1_4"> </li>
+        <li id="stop1_5"> </li>
     </ul>
-    <h3>Example stop 2</h3>
+    <h3 id="stop2">Example stop 2</h3>
     <ul>
-        <li>1 minute: 123 to Example Street</li>
-        <li>4 minutes: 456 to Fantasy Land</li>
+        <li id="stop2_1">2 minutes: 123 to Example Street</li>
+        <li id="stop2_2">3 minutes: 456 to Fantasy Land</li>
+        <li id="stop2_3"> </li>
+        <li id="stop2_4"> </li>
+        <li id="stop2_5"> </li>
     </ul>
 </div>
 
 
-<script>
-    function test() {
-
-        var inputs = document.getElementById("getcode").elements;
-        var inputByName = inputs["postcode"].value;         // it is really like this!!!
-
-        alert("Got postcode: " + inputByName)
-
-        // TODO: now got the input, feed to functions
-    }
-
-    // function result() in departure.js
-
-</script>
-
-
+<script type="text/javascript" src="departures.js"></script>
 
 </body>
 </html>

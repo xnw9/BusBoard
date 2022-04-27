@@ -44,3 +44,25 @@ function showDetails(stopCode) {
 
     })
 }
+
+// --------------------------------------------------------------
+var XMLHttpRequest = require('xhr2');
+
+
+// modify HTML from script
+
+
+var xhttp = new XMLHttpRequest();
+
+xhttp.open('GET', 'http://localhost:3000/board?postcode=sw75qq', true);
+
+xhttp.setRequestHeader('Content-Type', 'application/json');
+
+xhttp.onload = function() {
+    // Handle response here using e.g. xhttp.status, xhttp.response, xhttp.responseText
+    var resText = xhttp.responseText
+    let json = JSON.parse(resText);
+    console.log(json)           // now we got the json, what next?
+}
+
+xhttp.send();

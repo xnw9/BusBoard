@@ -56,11 +56,13 @@ function getStopsDetails(stops) {
         console.log(`We got ${stop1} ${stop2}`)
 
 
-        let details = []
+        let details = {}
+        let stoporders = ["stop1", "stop2"]
         appKey = "c2a002a07d574daaa294449eed950387"
 
         for (let j in stops) {
-            let detail = [stops[j][1]]
+            let detail = {"commonName": stops[j][1]}
+
             requestLink = "https://api.tfl.gov.uk/StopPoint/" + stops[j][0] + "/Arrivals?app_key=" + appKey
             request(requestLink, function (error, response, body) {
                 let json = JSON.parse(body);
@@ -68,14 +70,17 @@ function getStopsDetails(stops) {
                 for (let i = 0; i < Math.min(num, 5); i++) {
                     lineName = json[i]["lineName"]
                     desName = json[i]["destinationName"]
-                    time = parseFloat(json[i]["timeToStation"] / 60).toFixed(2)
+                    time = parseFloat(json[i]["timeToStation"] / 60).toFixed(0)
 
                     console.log(lineName, desName, time)
-                    detail.push([lineName, desName, time])
+                    // detail.push([lineName, desName, time])
+                    detail[String(i+1)] = {"lineName": lineName, "desName": desName, "time": time}
                 }
-                details.push(detail)
+                // details.push(detail)
+                details[stoporders[j]] = detail
+                console.log(details)
 
-                if (details.length == 2) {
+                if (Object.keys( details ).length == 2) {
                     resolve(details)
                 }
                 // so need to resolve WITHIN request to get it out
@@ -105,7 +110,7 @@ function getInfo(postcode) {
 // need to be in front of everything
 app.use(express.static('frontend'));
 
-// TODO: add reject / get reject / if reject, raise 404 maybe
+// TODO: add reject / get reject / if reject, raise 400 bad request
 app.get("/board", (req, res) => {
     // JSON result is visible from the browser
     // route parameter: /board

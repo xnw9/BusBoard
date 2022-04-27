@@ -9,7 +9,7 @@
 <body>
 <h1>BusBoard</h1>
 <!--<form action="javascript:void(0)" onsubmit="void(0);">-->
-<form action="javascript:void(0)" onsubmit="test()">
+<form id="getcode" action="javascript:void(0)" onsubmit="result()">
     Postcode:<br>
     <input type="text" name="postcode">
     <input type="submit" value="Submit">
@@ -31,9 +31,16 @@
 
 <script>
     function test() {
-        alert("Got it");
+
+        var inputs = document.getElementById("getcode").elements;
+        var inputByName = inputs["postcode"].value;         // it is really like this!!!
+
+        alert("Got postcode: " + inputByName)
+
+        // TODO: now got the input, feed to functions
     }
-    // TODO: but how to obtain input???
+
+    // function result() in departure.js
 
 </script>
 

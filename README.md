@@ -33,7 +33,7 @@ See if you can return a sensible error code in case you can't find any results!
 ### p6 html
 - [x] add a page
 - [ ] add more new features
-- [ ] navigate between pages
+- [x] navigate between pages     <- better method?
 
 ### stretch goals
 - [ ] CSS
@@ -41,6 +41,7 @@ See if you can return a sensible error code in case you can't find any results!
 - [ ] display error message if postcode is invalid
 
 ### in addition...
-- [ ] only add list item when required   <- working on
+- [ ] only add list item when required   
 - [ ] button for nw51tl
 - [ ] order by arrival times
+- [ ] import modules

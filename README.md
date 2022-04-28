@@ -13,8 +13,7 @@ ask the user for a stop code:
 - [x] combine them
 
 ### p3 promises
-- [x] pull each function out and give them their own definition
-- [ ] give chance to pass errors along to the top-level function.
+- [x] pull each function out and give them their own definition - give chance to pass errors along to the top-level function
 - [x] goal: asynchronous request returns a Promise instead of accepting a callback
 
 ### p4 express
@@ -38,5 +37,9 @@ See if you can return a sensible error code in case you can't find any results!
 
 ### stretch goals
 - [ ] CSS
-- [ ] aotomatic refresh
+- [ ] automatic refresh
 - [ ] display error message if postcode is invalid
+
+### in addition...
+- [ ] only add list item when required   <- working on
+- [ ] button for nw51tl

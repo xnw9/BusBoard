@@ -27,6 +27,16 @@ See if you can return a sensible error code in case you can't find any results!
 ### p5 all aboard
 - [x] render HTML
 - [x] Get the postcode that was entered
-- [ ] Make a request to our API endpoint to find the data for that postcode
-- [ ] Update the HTML on the page to display the results
+- [x] Execute some js when the form is submitted using the onsubmit attribute of the form element
+- [x] Make a request to our API endpoint to find the data for that postcode
+- [x] Update the HTML from js to display the results
 
+### p6 html
+- [x] add a page
+- [ ] add more new features
+- [ ] navigate between pages
+
+### stretch goals
+- [ ] CSS
+- [ ] aotomatic refresh
+- [ ] display error message if postcode is invalid

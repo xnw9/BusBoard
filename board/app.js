@@ -131,9 +131,8 @@ app.get("/board", (req, res) => {
     runProgram();
 
 })
+app.use('/history', express.static('frontend/history.html'))
 
-// DONE: construct JSON for result
-// DONE: send multiple stuff to client
 // TODO: import promises from p1.js instead
 
 app.listen(port, () => {

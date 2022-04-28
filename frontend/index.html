@@ -2,31 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Departure boards</title>
+    <title>BusBoard</title>
     <link rel="stylesheet" href="styles.css">
     <script src="departures.js"></script>
 </head>
 <body>
-<h1>BusBoard</h1>
-<!--<form action="javascript:void(0)" onsubmit="void(0);">-->
+<h1>Departure Board</h1>
+
 <form id="getcode" action="javascript:void(0)" onsubmit="result()">
     Postcode:<br>
-    <input type="text" name="postcode">
+    <input id="text" type="text" name="postcode">
     <input type="submit" value="Submit">
 </form>
+
+<h3>  </h3>
+<!--quick search-->
+<!--did not work!-->
+<!--<form action="http://localhost:3000/?postcode=nw51tl">-->
+<!--<form action="javascript:void(0)" onsubmit="office()">
+    <input type="submit" value="For London office" >
+</form>-->
+
+
 <div id="results">
     <h2 id="result">Results</h2>
-    <h3 id="stop1">Example stop 1</h3>
-    <ul>
-        <li id="stop1_1">2 minutes: 123 to Example Street</li>
+    <h3 id="stop1">Closest stop 1 will be shown here</h3>
+    <ul id="stop1_buses">
+        <li id="stop1_1">Buses arriving soon will be shown here</li>
         <li id="stop1_2">3 minutes: 456 to Fantasy Land</li>
         <li id="stop1_3"> </li>
         <li id="stop1_4"> </li>
         <li id="stop1_5"> </li>
     </ul>
-    <h3 id="stop2">Example stop 2</h3>
-    <ul>
-        <li id="stop2_1">2 minutes: 123 to Example Street</li>
+    <h3 id="stop2">Closest stop 2 will be shown here</h3>
+    <ul id="stop2_buses">
+        <li id="stop2_1">Buses arriving soon will be shown here</li>
         <li id="stop2_2">3 minutes: 456 to Fantasy Land</li>
         <li id="stop2_3"> </li>
         <li id="stop2_4"> </li>
@@ -34,8 +44,29 @@
     </ul>
 </div>
 
+<!--very basic "switch screen" button-->
+<form action="http://localhost:3000/history">
+    <input type="submit" value="Go to history page" />
+</form>
 
-<script type="text/javascript" src="departures.js"></script>
+<!--stupid way to add empty line-->
+<h3>  </h3>
+
+<img src="brand.png" alt="brand" width="200" height="200">
+
+<div>
+    <script type="text/javascript" src="departures.js"></script>
+    <h6>Service provided by TFL API</h6>
+</div>
+
+<!--
+<script>
+    function office() {
+        document.getElementById("text").innerHTML = "nw51tl"
+        console.log("office")
+    }
+</script>
+-->
 
 </body>
 </html>

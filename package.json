@@ -1,0 +1,25 @@
+{
+  "name": "busboard",
+  "version": "1.0.0",
+  "description": "given a postcode, finds the two nearest bus stops, and shows the next five buses due at each.",
+  "main": "p1.js",
+  "dependencies": {
+    "express": "^4.18.0",
+    "request": "^2.88.2",
+    "xhr2": "^0.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xnw9/BusBoard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xnw9/BusBoard/issues"
+  },
+  "homepage": "https://github.com/xnw9/BusBoard#readme"
+}

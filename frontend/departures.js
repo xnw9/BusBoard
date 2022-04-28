@@ -3,13 +3,13 @@ function format(json) {
 }
 
 function result() {
-    // get user input - success
+    // ----- get user input - success
     var inputs = document.getElementById("getcode").elements;
     var postcode = inputs["postcode"].value.replace(" ", "");   // get rid of space
 
     alert("Got postcode: " + postcode)
 
-    // send request and get json result
+    // ----- send request and get json result
     // var XMLHttpRequest = require('xhr2');    // remember to remove when using in browser
     var xhttp = new XMLHttpRequest();
     xhttp.open('GET', 'http://localhost:3000/board?postcode=' + postcode, true);
@@ -39,12 +39,12 @@ function result() {
         }
                 */
 
-        // result for stop 1
+        // ----- result for stop 1
         for (let i = 1; i <= Object.keys(json["stop1"]).length - 1; i++) {
             document.getElementById("stop1_" + String(i)).innerHTML = format(json["stop1"][String(i)])
         }
 
-        // result for stop 2
+        // ----- result for stop 2
         for (let i = 1; i <= Object.keys(json["stop2"]).length - 1; i++) {
             document.getElementById("stop2_" + String(i)).innerHTML = format(json["stop2"][String(i)])
         }

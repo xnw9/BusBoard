@@ -59,8 +59,7 @@ function findStop(lat, lon) {
 
 // findStop(51.491035, -0.038207)
 
-// postcode -> stop code in one functiong
-// request inside request for now
+// postcode -> stop code in one function, request inside request for now
 function findStopCodeR(postcode) {
     requestLink = "https://api.postcodes.io/postcodes/" + postcode
     request(requestLink, function (error, response, body) {
@@ -88,8 +87,8 @@ function findStopCodeR(postcode) {
 
 // findStopCodeR("SE85EP")
 
-// ---------------------------- promises -----------------------------------
-// that are useful
+// ------------------------------- promises -----------------------------------
+// that are actually useful
 
 function postcode2lonlat(postcode) {
     return new Promise((resolve) => {
@@ -144,11 +143,13 @@ function getStopsDetails(stops) {
         stop2 = stops[1][0]
         console.log(`We got ${stop1} ${stop2}`)
 
-        let details = []
+        let details = {}
+        let stoporders = ["stop1", "stop2"]
         appKey = "c2a002a07d574daaa294449eed950387"
 
         for (let j in stops) {
-            let detail = [{"stationName" : stops[j][1]}]
+            let detail = {"commonName": stops[j][1]}
+
             requestLink = "https://api.tfl.gov.uk/StopPoint/" + stops[j][0] + "/Arrivals?app_key=" + appKey
             request(requestLink, function (error, response, body) {
                 let json = JSON.parse(body);
@@ -156,19 +157,17 @@ function getStopsDetails(stops) {
                 for (let i = 0; i < Math.min(num, 5); i++) {
                     lineName = json[i]["lineName"]
                     desName = json[i]["destinationName"]
-                    time = parseFloat(json[i]["timeToStation"] / 60).toFixed(2)
+                    time = parseFloat(json[i]["timeToStation"] / 60).toFixed(0)
 
                     console.log(lineName, desName, time)
-                    let item = {
-                        "lineName": lineName,
-                        "desName": desName,
-                        "time": time
-                    }
-                    detail.push(item)
-                }
-                details.push(detail)
 
-                if (details.length == 2) {
+                    detail[String(i+1)] = {"lineName": lineName, "desName": desName, "time": time}
+                }
+
+                details[stoporders[j]] = detail
+                console.log(details)
+
+                if (Object.keys( details ).length == 2) {
                     resolve(details)
                 }
                 // so need to resolve WITHIN request to get it out
@@ -181,22 +180,16 @@ function getStopsDetails(stops) {
     })
 }
 
-let stops = [['490008660S', 'Greenwood Centre'], ['490008660N', 'Lady Somerset Road']]
-
 // --------------------------------- testing ------------------------------
 const runProgram = async () => {
     let lonlat = await postcode2lonlat(here);
 
-    let stops = await lonlat2stop( lonlat[0], lonlat[1]);       // lon & lat
+    let stops = await lonlat2stop(lonlat[0], lonlat[1]);       // lon & lat
 
     let r = await getStopsDetails(stops)
     console.log(r)
 }
 runProgram();
 
-
-// TODO: reject in Promises!  -  how to catch errors
-// perhaps TODO: arrange in order
-
-// ----------------------------- express --------------------------------
-// another file
+// export, to be used in app.js
+module.exports = {postcode2lonlat, lonlat2stop, getStopsDetails};
